@@ -10,8 +10,8 @@ using Taxi.Web.Data;
 namespace Taxi.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200307003256_Inicio")]
-    partial class Inicio
+    [Migration("20200307233100_agregarindexEnTaxi")]
+    partial class agregarindexEnTaxi
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,7 +33,10 @@ namespace Taxi.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TaxiEntities");
+                    b.HasIndex("Plaque")
+                        .IsUnique();
+
+                    b.ToTable("Taxis");
                 });
 
             modelBuilder.Entity("Taxi.Web.Data.Entities.TripDetailEntity", b =>
@@ -54,7 +57,7 @@ namespace Taxi.Web.Migrations
 
                     b.HasIndex("TripId");
 
-                    b.ToTable("TripDetailEntities");
+                    b.ToTable("TripDetails");
                 });
 
             modelBuilder.Entity("Taxi.Web.Data.Entities.TripEntity", b =>
@@ -91,7 +94,7 @@ namespace Taxi.Web.Migrations
 
                     b.HasIndex("TaxiId");
 
-                    b.ToTable("TripEntities");
+                    b.ToTable("Trips");
                 });
 
             modelBuilder.Entity("Taxi.Web.Data.Entities.TripDetailEntity", b =>

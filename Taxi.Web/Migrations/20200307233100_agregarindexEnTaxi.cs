@@ -4,12 +4,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Taxi.Web.Migrations
 {
-    public partial class Inicio : Migration
+    public partial class agregarindexEnTaxi : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "TaxiEntities",
+                name: "Taxis",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -18,11 +18,11 @@ namespace Taxi.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TaxiEntities", x => x.Id);
+                    table.PrimaryKey("PK_Taxis", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TripEntities",
+                name: "Trips",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -41,17 +41,17 @@ namespace Taxi.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TripEntities", x => x.Id);
+                    table.PrimaryKey("PK_Trips", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TripEntities_TaxiEntities_TaxiId",
+                        name: "FK_Trips_Taxis_TaxiId",
                         column: x => x.TaxiId,
-                        principalTable: "TaxiEntities",
+                        principalTable: "Taxis",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "TripDetailEntities",
+                name: "TripDetails",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -63,36 +63,42 @@ namespace Taxi.Web.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TripDetailEntities", x => x.Id);
+                    table.PrimaryKey("PK_TripDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TripDetailEntities_TripEntities_TripId",
+                        name: "FK_TripDetails_Trips_TripId",
                         column: x => x.TripId,
-                        principalTable: "TripEntities",
+                        principalTable: "Trips",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_TripDetailEntities_TripId",
-                table: "TripDetailEntities",
+                name: "IX_Taxis_Plaque",
+                table: "Taxis",
+                column: "Plaque",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TripDetails_TripId",
+                table: "TripDetails",
                 column: "TripId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TripEntities_TaxiId",
-                table: "TripEntities",
+                name: "IX_Trips_TaxiId",
+                table: "Trips",
                 column: "TaxiId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TripDetailEntities");
+                name: "TripDetails");
 
             migrationBuilder.DropTable(
-                name: "TripEntities");
+                name: "Trips");
 
             migrationBuilder.DropTable(
-                name: "TaxiEntities");
+                name: "Taxis");
         }
     }
 }

@@ -31,7 +31,10 @@ namespace Taxi.Web.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TaxiEntities");
+                    b.HasIndex("Plaque")
+                        .IsUnique();
+
+                    b.ToTable("Taxis");
                 });
 
             modelBuilder.Entity("Taxi.Web.Data.Entities.TripDetailEntity", b =>
@@ -52,7 +55,7 @@ namespace Taxi.Web.Migrations
 
                     b.HasIndex("TripId");
 
-                    b.ToTable("TripDetailEntities");
+                    b.ToTable("TripDetails");
                 });
 
             modelBuilder.Entity("Taxi.Web.Data.Entities.TripEntity", b =>
@@ -89,7 +92,7 @@ namespace Taxi.Web.Migrations
 
                     b.HasIndex("TaxiId");
 
-                    b.ToTable("TripEntities");
+                    b.ToTable("Trips");
                 });
 
             modelBuilder.Entity("Taxi.Web.Data.Entities.TripDetailEntity", b =>
