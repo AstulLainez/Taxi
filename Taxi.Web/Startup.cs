@@ -43,7 +43,7 @@ namespace Taxi.Web
 
             services.AddTransient<SeedDb>();
             services.AddScoped<IUserHelpers, UserHelpers>();
-
+            services.AddScoped<IConverterHelper, ConverterHelper>();
             services.AddIdentity<UserEntity, IdentityRole>(cfg =>
             {
                 cfg.User.RequireUniqueEmail = true;
